@@ -9,6 +9,9 @@ import {
   SheetTitle,
   SheetDescription,
 } from "@/components/ui/sheet"
+import AuthForm from '@/components/auth/AuthForm'
+import { useAuth } from '@/contexts/AuthContext'
+import { useFluencyProgress } from '@/hooks/useFluencyProgress'
 
 // Situation list items
 const situations = [
@@ -503,12 +506,27 @@ function UserProfileSheet() {
 }
 
 export default function FluencyFramesApp() {
+  const { user, isLoading } = useAuth()
+  const { updateScore, isUpdating } = useFluencyProgress(user?.id ?? null)
+
   // State for mobile view toggle
   const [showChat, setShowChat] = useState(false)
   
   // State for sheet modals
   const [interlocutorSheetOpen, setInterlocutorSheetOpen] = useState(false)
   const [userSheetOpen, setUserSheetOpen] = useState(false)
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-slate-50">
+        <div className="h-10 w-10 rounded-full border-4 border-primary/20 border-t-primary animate-spin" />
+      </div>
+    )
+  }
+
+  if (!user) {
+    return <AuthForm />
+  }
 
   return (
     <div className="min-h-screen bg-slate-50">
