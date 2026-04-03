@@ -12,6 +12,7 @@ import {
 import AuthForm from '@/components/auth/AuthForm'
 import { useAuth } from '@/contexts/AuthContext'
 import { useFluencyProgress } from '@/hooks/useFluencyProgress'
+import { ActionStack } from '@/components/ActionStack'
 
 // Situation list items
 const situations = [
@@ -297,77 +298,7 @@ function ActiveChatPanel({
       </div>
 
       {/* THE BOTTOM ACTION STACK - Most Important Part */}
-      <div className="border-t border-[#E7E5E4] bg-white">
-        <div className="p-4 md:p-6 flex items-end gap-4">
-          {/* Left side: Syntax Box and Options */}
-          <div className="flex-1">
-            {/* The Syntax Box */}
-            <div className="bg-white border border-[#E7E5E4] rounded-full px-4 md:px-6 py-3 mb-4">
-              <p className="text-[13px] md:text-[14px] text-[#0C0A09]">
-                I agree, but I{" "}
-                <span className="inline-flex items-center px-2 py-0.5 bg-green-100 text-green-700 rounded text-[12px] md:text-[13px] font-medium">
-                  [know.receive]
-                </span>{" "}
-                it too late.
-              </p>
-            </div>
-
-            {/* The Options Grid - Vocabulary options */}
-            <div className="flex flex-wrap gap-2 md:gap-3">
-              <span className="text-[12px] md:text-[13px] text-[#22C55E]">ascertain get sth by evidence ...</span>
-              <span className="text-[12px] md:text-[13px] text-[#22C55E]">perceive become aware of ...</span>
-              <span className="text-[12px] md:text-[13px] text-[#22C55E] hidden md:inline">discern recognize or distinguish ...</span>
-            </div>
-          </div>
-
-          {/* Right side: User Avatar with Progress Ring - clickable */}
-          <button 
-            onClick={onOpenUserSheet}
-            className="flex items-center gap-3 flex-shrink-0 cursor-pointer hover:opacity-80 transition-opacity"
-          >
-            {/* User info stack */}
-            <div className="text-right hidden md:block">
-              <p className="text-[13px] font-medium text-[#0C0A09]">user name</p>
-              <p className="text-[12px] text-[#78716C]">user role</p>
-              {/* Progress box */}
-              <div className="mt-1 bg-white border border-[#E7E5E4] rounded px-2 py-0.5 inline-block">
-                <span className="text-[12px] text-[#0C0A09]">42%</span>
-              </div>
-            </div>
-
-            {/* Avatar with colored progress ring */}
-            <div className="relative">
-              {/* Progress ring - circular border */}
-              <div className="w-[47px] h-[47px] rounded-full border-2 border-black/20 flex items-center justify-center">
-                {/* Actual avatar */}
-                <Avatar size={43} variant="purple" />
-              </div>
-              {/* Progress indicator overlay using SVG */}
-              <svg
-                className="absolute inset-0 w-[47px] h-[47px] -rotate-90"
-                viewBox="0 0 47 47"
-              >
-                <circle
-                  cx="23.5"
-                  cy="23.5"
-                  r="22"
-                  fill="none"
-                  stroke="url(#progressGradient)"
-                  strokeWidth="2"
-                  strokeDasharray={`${0.42 * 138.2} ${138.2}`}
-                  strokeLinecap="round"
-                />
-                <defs>
-                  <linearGradient id="progressGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%" stopColor="#22C55E" />
-                    <stop offset="100%" stopColor="#4ADE80" />
-                  </linearGradient>
-                </defs>
-              </svg>
-            </div>
-          </button>
-        </div>
-      </div>
+      <ActionStack />
     </div>
   )
 }
